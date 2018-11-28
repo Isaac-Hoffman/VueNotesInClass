@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>Document</title>
+        <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    </head>
+    <body>
+        <div id="app">
+            <div v-for="task in tasks">
+                <input type="checkbox">
+                {{ task }}
+                <span @click="removeItem(task)">remove </span>
+            </div>
+            <input type="text" v-model="theText">
+            <button @click="addItem">Add Item</button>
+            <p v-if="numItems > 0">Items in List: {{ numItems }}</p>
+        </div>
+        <script>
+            var app = new Vue({
+                el: "#app",
+                data: {
+                    numItems: 3,
+                    theText: "",
+                    tasks: ["Learn Vue", "Cyber Monday", "Sleep"],
+                },
+                methods: {
+                    addItem(){
+                        console.log(this.theText);
+                        this.tasks.push(this.theText);
+                        this.numItems++;
+                    },
+                    removeItem(item){
+                        console.log(this.tasks.indexOf(item));
+                        index = this.tasks.indexOf(item);
+                        this.tasks.splice(index, 1);
+                        this.numItems--;
+                    }
+                }
+            });
+        </script>
+    </body>
+</html>
